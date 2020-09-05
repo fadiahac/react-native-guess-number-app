@@ -5,23 +5,40 @@ import FontStylesheets from '../constants/Default-stylesheet';
 
 const Header = props => {
     return (
-        <View style={styles.header}>
-            <Text style={{...FontStylesheets.headerText,...styles.headerTitle}}>{props.title}</Text>
+        <View style={
+            {
+                ...styles.headerBase,
+                ...Platform.select(
+                    {
+                        ios: styles.headerIos,
+                        android: styles.headerAndroid
+                    }
+                )
+            }}>
+            <Text style={{ ...FontStylesheets.headerText, ...styles.headerTitle }}>{props.title}</Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    header: {
+    headerBase: {
         width: '100%',
         height: 90,
-        backgroundColor: Platform.OS === 'android' ? Colors.primary : 'grey',
         paddingTop: 35,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+
+    },
+    headerIos: {
+        backgroundColor: 'white',
+        borderBottomColor: 'grey',
+        borderBottomWidth: 1,
+    },
+    headerAndroid: {
+        backgroundColor: Colors.primary,
     },
     headerTitle: {
-        color: 'white',
+        color: Platform.OS === 'android' ? 'white' : Colors.primary,
         fontSize: 23
     }
 });

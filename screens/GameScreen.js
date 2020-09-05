@@ -118,7 +118,7 @@ const GameScreen = props => {
                     }
                 </ScrollView> */}
                 <FlatList contentContainerStyle={styles.list}
-                    keyExtractor={item => item.index}
+                    keyExtractor={item => item.toString()}
                     data={oldGuesses}
                     renderItem={(data) => renderGuessList(data.item, oldGuesses.length - data.index)}
                 />
